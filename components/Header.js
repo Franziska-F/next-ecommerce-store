@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { css } from '@emotion/react';
 
 const header = css`
-  background-color: red;
+  background-color: purple;
   display: flex;
   justify-content: space-between;
 
@@ -18,10 +18,10 @@ const header = css`
   }
   .links ul a {
     cursor: pointer;
+    color: orange;
   }
   .links ul a:hover {
     font-size: 18px;
-    background-color: bisque;
   }
   .cart {
     margin-right: 30px;

@@ -28,7 +28,7 @@ export const productDatabase = [
     name: 'The Dark',
     type: 'Viennese emperor',
     description:
-      'Not up for the colorful stuff and sunny days? Want a butterfly that has the size of bat? Than this dark, beautyful creature of the night is perfect for you. ',
+      'Not up for the colorful stuff and bright days? Want a butterfly that has the size of bat? Than this dark, beautyful creature of the night is perfect for you. ',
     price: '1200',
   },
 ];

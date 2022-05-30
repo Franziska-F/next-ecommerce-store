@@ -1,3 +1,9 @@
+import {
+  React,
+  useState,
+} from 'react';
+
+import Cookies from 'js-cookie';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -18,6 +24,9 @@ const wrapper = css`
 `;
 
 export default function ButterflyDetails(props) {
+  const [isInCart, setIsInCart] = useState('count' in props.butterfly);
+  const [count, setCount] = useState(props.butterfly.count || 1);
+
   if (!props.butterfly) {
     return (
       <div>
@@ -55,7 +64,66 @@ export default function ButterflyDetails(props) {
         <div>Price: {props.butterfly.price / 100} € </div>
         <div>
           {' '}
-          <button>Buy</button>
+          <div className="quantity-counter">
+            <button
+              className="btn-control"
+              onClick={() => {
+                if (count > 1) {
+                  setCount(count - 1);
+                }
+              }}
+            >
+              ⬇️
+            </button>
+            <span className="count">{count}</span>
+            <button
+              className="btn-control"
+              onClick={() => {
+                setCount(count + 1);
+              }}
+            >
+              ⬆️
+            </button>
+          </div>
+          <button
+            onClick={() => {
+              const currentCart = Cookies.get('products') // is there a cookie with value 'product'?
+                ? JSON.parse(Cookies.get('products'))
+                : []; // if not, return empty array
+              let newCart;
+
+              // is product inside cart?
+
+              if (
+                currentCart.find(
+                  (productsInCart) => props.butterfly.id === productsInCart.id,
+                )
+              ) {
+                newCart = currentCart.map((obj) =>
+                  obj.id === props.butterfly.id
+                    ? { ...obj, count: obj.count + count }
+                    : obj,
+                );
+                setCount(count);
+                /* newCart = currentCart.filter((productsInCart) => {
+                  return productsInCart.id !== props.butterfly.id;
+                }); // if id is different, pass the filter
+                setIsInCart(true);
+                setCount(count); */
+              } else {
+                newCart = [
+                  ...currentCart,
+                  { id: props.butterfly.id, count: count },
+                ];
+                setIsInCart(true);
+              }
+              // update the cookie
+              Cookies.set('products', JSON.stringify(newCart));
+            }}
+          >
+            {' '}
+            Add to cart
+          </button>
         </div>
       </div>
     </div>
@@ -63,16 +131,20 @@ export default function ButterflyDetails(props) {
 }
 
 export function getServerSideProps(context) {
+  const currentCart = JSON.parse(context.req.cookies.products || '[]');
+  console.log(currentCart);
   const foundButterfly = productDatabase.find((butterfly) => {
     return butterfly.id === context.query.id;
   });
-  if (!foundButterfly) {
-    context.res.statusCode = 404;
-  }
 
+  const inCart = currentCart.find(
+    (productsInCart) => foundButterfly.id === productsInCart.id,
+  );
+
+  const butterflyInCart = { ...foundButterfly, ...inCart };
   return {
     props: {
-      butterfly: foundButterfly || null,
+      butterfly: butterflyInCart || null,
     },
   };
 }

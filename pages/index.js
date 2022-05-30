@@ -1,5 +1,11 @@
 import Head from 'next/head';
 
+import { css } from '@emotion/react';
+
+const title = css`
+  text-align: center;
+`;
+
 export default function Home() {
   return (
     <>
@@ -8,7 +14,7 @@ export default function Home() {
         <meta name="description" content="Shop for butterflies" />
       </Head>
       <div>
-        <h1>Welcome</h1>
+        <h1 css={title}>Welcome</h1>
       </div>
     </>
   );

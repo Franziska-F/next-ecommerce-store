@@ -6,7 +6,7 @@ import { css } from '@emotion/react';
 import { productDatabase } from '../util/database';
 
 const test = css`
-  background-color: red;
+  text-align: center;
 `;
 
 export default function Products(props) {
