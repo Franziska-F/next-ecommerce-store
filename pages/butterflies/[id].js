@@ -24,8 +24,8 @@ const wrapper = css`
 `;
 
 export default function ButterflyDetails(props) {
-  const [isInCart, setIsInCart] = useState('count' in props.butterfly);
-  const [count, setCount] = useState(props.butterfly.count || 1);
+  // const [isInCart, setIsInCart] = useState('count' in props.butterfly);
+  const [count, setCount] = useState(1);
 
   if (!props.butterfly) {
     return (
@@ -104,7 +104,7 @@ export default function ButterflyDetails(props) {
                     ? { ...obj, count: obj.count + count }
                     : obj,
                 );
-                setCount(count);
+                // setCount(count);
                 /* newCart = currentCart.filter((productsInCart) => {
                   return productsInCart.id !== props.butterfly.id;
                 }); // if id is different, pass the filter
@@ -115,7 +115,7 @@ export default function ButterflyDetails(props) {
                   ...currentCart,
                   { id: props.butterfly.id, count: count },
                 ];
-                setIsInCart(true);
+                //  setIsInCart(true);
               }
               // update the cookie
               Cookies.set('products', JSON.stringify(newCart));
@@ -132,16 +132,19 @@ export default function ButterflyDetails(props) {
 
 export function getServerSideProps(context) {
   const currentCart = JSON.parse(context.req.cookies.products || '[]');
-  console.log(currentCart);
+
   const foundButterfly = productDatabase.find((butterfly) => {
     return butterfly.id === context.query.id;
   });
+  // console.log(foundButterfly);
 
-  const inCart = currentCart.find(
-    (productsInCart) => foundButterfly.id === productsInCart.id,
-  );
+  const inCart = currentCart.find((object) => {
+    return foundButterfly.id === object.id;
+  });
+  // console.log(inCart);
 
   const butterflyInCart = { ...foundButterfly, ...inCart };
+  // console.log(butterflyInCart);
   return {
     props: {
       butterfly: butterflyInCart || null,
