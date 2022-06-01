@@ -3,12 +3,14 @@ import {
   useState,
 } from 'react';
 
+import Cookies from 'js-cookie';
 import Head from 'next/head';
 
 import { productDatabase } from '../util/database';
 
 export default function Cart(props) {
-  const [count, setCount] = useState(1);
+  const [isInCart, setIsInCart] = useState('quantity' in props.product);
+  //  const [count, setCount] = useState(1);
   console.log(props);
   return (
     <div>
@@ -24,7 +26,7 @@ export default function Cart(props) {
             <div key={detail.id}>
               <div>{detail.name}</div> <div>Price: {detail.price / 100} € </div>
               <div>Quantity: {detail.quantitiy} </div>{' '}
-              <div className="quantity-counter">
+              {/* } <div className="quantity-counter">
                 <button
                   className="btn-control"
                   onClick={() => {
@@ -43,6 +45,32 @@ export default function Cart(props) {
                   }}
                 >
                   ⬆️
+                </button>
+                </div> { */}
+              <div className="remove-btn">
+                <button
+                  onClick={() => {
+                    const currentCart = Cookies.get('products')
+                      ? JSON.parse(Cookies.get('products'))
+                      : [];
+                    let newCart;
+
+                    // props.product.find(
+                    //  (productInCart) => productInCart.id === props.product.id,
+                    // );
+                    // console.log(currentCart);
+
+                    newCart = currentCart.filter(
+                      (productInCart) => productInCart.id !== detail.id,
+                    );
+                    console.log(newCart);
+
+                    Cookies.set('products', JSON.stringify(newCart));
+
+                    setIsInCart(false);
+                  }}
+                >
+                  Remove
                 </button>
               </div>
             </div>
