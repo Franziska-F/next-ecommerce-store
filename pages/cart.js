@@ -5,13 +5,20 @@ import {
 
 import Cookies from 'js-cookie';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import { productDatabase } from '../util/database';
 
 export default function Cart(props) {
-  const [isInCart, setIsInCart] = useState('quantity' in props.product);
+  const [isInCart, setIsInCart] = useState(props.product);
   //  const [count, setCount] = useState(1);
-  console.log(props);
+
+  let Sum = props.product.reduce(function (prev, current) {
+    return prev + current.quantitiy * current.price;
+  }, 0);
+
+  const [totalSum, setTotalSum] = useState(Sum);
+
   return (
     <div>
       <Head>
@@ -55,19 +62,23 @@ export default function Cart(props) {
                       : [];
                     let newCart;
 
-                    // props.product.find(
-                    //  (productInCart) => productInCart.id === props.product.id,
-                    // );
-                    // console.log(currentCart);
-
                     newCart = currentCart.filter(
                       (productInCart) => productInCart.id !== detail.id,
                     );
                     console.log(newCart);
 
+                    let newArray = newCart.filter(
+                      (item) => item.id !== detail.id,
+                    );
+                    console.log(newArray);
+
                     Cookies.set('products', JSON.stringify(newCart));
 
-                    setIsInCart(false);
+                    setTotalSum(Sum);
+                    setIsInCart(newArray);
+                    console.log(isInCart);
+
+                    // console.log(props.product);
                   }}
                 >
                   Remove
@@ -76,6 +87,15 @@ export default function Cart(props) {
             </div>
           );
         })}
+      </div>
+      <div>
+        <span>Total sum: {totalSum / 100}</span>
+      </div>
+      <br />
+      <div>
+        <Link href="/checkout">
+          <button>Check out</button>
+        </Link>
       </div>
     </div>
   );

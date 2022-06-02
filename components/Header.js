@@ -43,6 +43,7 @@ export default function Header() {
         </ul>
       </div>
       <div className="cart">
+        <span>Items: </span>
         <Link href="/cart"> 🛒 </Link>
       </div>
     </header>
