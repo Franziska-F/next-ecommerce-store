@@ -7,7 +7,27 @@ import Cookies from 'js-cookie';
 import Head from 'next/head';
 import Link from 'next/link';
 
+import { css } from '@emotion/react';
+
 import { productDatabase } from '../util/database';
+
+const card = css`
+  background-color: #fffef2;
+  color: #71716d;
+
+  .product-section {
+    border-top: 1px solid #71716d;
+  }
+  .inner-product-section {
+    border-top: 1px solid #71716d;
+    padding: 16px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .checkout {
+    text-align: end;
+  }
+`;
 
 export default function Cart(props) {
   const [inCart, setInCart] = useState(props.product);
@@ -25,15 +45,17 @@ export default function Cart(props) {
         <title> The Butterflyshop || Cart </title>
         <meta name="description" content="A shop for the best butterflies" />
       </Head>
-      <h1>Your cart </h1>
-      {}{' '}
-      <div className="card-wrapper">
-        {inCart.map((detail) => {
-          return (
-            <div key={detail.id}>
-              <div>{detail.name}</div> <div>Price: {detail.price / 100} € </div>
-              <div>Quantity: {detail.quantitiy} </div>{' '}
-              {/* } <div className="quantity-counter">
+      <main css={card}>
+        <h1>Your cart </h1>
+        {}{' '}
+        <div className="product-section">
+          {inCart.map((detail) => {
+            return (
+              <div className="inner-product-section" key={detail.id}>
+                <div>{detail.name}</div>{' '}
+                <div>Price: {detail.price / 100} € </div>
+                <div>Quantity: {detail.quantitiy} </div>{' '}
+                {/* } <div className="quantity-counter">
                 <button
                   className="btn-control"
                   onClick={() => {
@@ -54,49 +76,52 @@ export default function Cart(props) {
                   ⬆️
                 </button>
                 </div> { */}
-              <div className="remove-btn">
-                <button
-                  onClick={() => {
-                    const currentCart = Cookies.get('products')
-                      ? JSON.parse(Cookies.get('products'))
-                      : [];
-                    let newCart;
+                <div className="remove-btn">
+                  <button
+                    onClick={() => {
+                      const currentCart = Cookies.get('products')
+                        ? JSON.parse(Cookies.get('products'))
+                        : [];
+                      let newCart;
 
-                    newCart = currentCart.filter(
-                      (productInCart) => productInCart.id !== detail.id,
-                    );
-                    // console.log(newCart);
+                      newCart = currentCart.filter(
+                        (productInCart) => productInCart.id !== detail.id,
+                      );
+                      // console.log(newCart);
 
-                    let newArray = inCart.filter(
-                      (item) => item.id !== detail.id,
-                    );
-                    console.log(newArray);
+                      let newArray = inCart.filter(
+                        (item) => item.id !== detail.id,
+                      );
+                      console.log(newArray);
 
-                    Cookies.set('products', JSON.stringify(newCart));
+                      Cookies.set('products', JSON.stringify(newCart));
 
-                    setTotalSum(Sum);
-                    setInCart([...newArray]);
-                    console.log(newCart);
+                      setTotalSum(Sum);
+                      setInCart([...newArray]);
+                      console.log(newCart);
 
-                    // console.log(props.product);
-                  }}
-                >
-                  Remove
-                </button>
+                      // console.log(props.product);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-      <div>
-        <span>Total sum: {totalSum / 100}</span>
-      </div>
-      <br />
-      <div>
-        <Link href="/checkout">
-          <button>Check out</button>
-        </Link>
-      </div>
+            );
+          })}
+        </div>
+        <div className="checkout">
+          <div>
+            <span>Total sum: {totalSum / 100}</span>
+          </div>
+          <br />
+          <div>
+            <Link href="/checkout">
+              <button>Check out</button>
+            </Link>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

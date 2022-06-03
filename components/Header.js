@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { css } from '@emotion/react';
 
 const header = css`
-  background-color: purple;
+  background-color: #333333;
   display: flex;
   justify-content: space-between;
+  color: #f1f0e3;
 
   .links ul {
     display: flex;
@@ -18,7 +19,7 @@ const header = css`
   }
   .links ul a {
     cursor: pointer;
-    color: orange;
+    color: #f1f0e3;
   }
   .links ul a:hover {
     font-size: 18px;
