@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 import { css } from '@emotion/react';
 
-import { productDatabase } from '../../util/database';
+import { getProduct } from '../../util/database';
 
 const wrapper = css`
   margin: 0 auto;
@@ -130,8 +130,8 @@ export default function ButterflyDetails(props) {
   );
 }
 
-export function getServerSideProps(context) {
-  const currentCart = JSON.parse(context.req.cookies.products || '[]');
+export async function getServerSideProps(context) {
+  /* const currentCart = JSON.parse(context.req.cookies.products || '[]');
 
   const foundButterfly = productDatabase.find((butterfly) => {
     return butterfly.id === context.query.id;
@@ -144,10 +144,12 @@ export function getServerSideProps(context) {
   // console.log(inCart);
 
   const butterflyInCart = { ...foundButterfly, ...inCart };
-  // console.log(butterflyInCart);
+  // console.log(butterflyInCart); */
+
+  const product = await getProduct(context.query.id);
   return {
     props: {
-      butterfly: butterflyInCart || null,
+      butterfly: product,
     },
   };
 }

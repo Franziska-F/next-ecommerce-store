@@ -4,14 +4,14 @@ import Link from 'next/link';
 
 import { css } from '@emotion/react';
 
-import { productDatabase } from '../util/database';
+import { getProducts } from '../util/database';
 
 const test = css`
   text-align: center;
   font-weight: lighter;
   color: #71716d;
 `;
-const products = css`
+const productWrapper = css`
   display: flex;
   padding: 40px;
 
@@ -20,7 +20,7 @@ const products = css`
   }
 `;
 
-export default function Products(props) {
+export default function AllProducts(props) {
   return (
     <>
       <Head>
@@ -28,7 +28,7 @@ export default function Products(props) {
         <meta name="description" content="List of avaliable butterflies" />
       </Head>{' '}
       <h1 css={test}>Products</h1>
-      <div css={products}>
+      <div css={productWrapper}>
         <div className="product-wrapper">
           {props.products.map((product) => {
             return (
@@ -56,10 +56,11 @@ export default function Products(props) {
   );
 }
 
-export function getServerSideProps() {
+export async function getServerSideProps() {
+  const products = await getProducts();
   return {
     props: {
-      products: productDatabase,
+      products: products,
     },
   };
 }

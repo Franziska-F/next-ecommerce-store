@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 import { css } from '@emotion/react';
 
-import { productDatabase } from '../util/database';
+import { getProducts } from '../util/database';
 
 const card = css`
   background-color: #fffef2;
@@ -126,14 +126,15 @@ export default function Cart(props) {
   );
 }
 
-export function getServerSideProps(context) {
+export async function getServerSideProps(context) {
+  const products = await getProducts();
   // get cookie content
   const currentCart = JSON.parse(context.req.cookies.products || '[]');
   // Get data from database
 
   const productInCart = currentCart.map((item) => {
     // create a variable to store item found
-    const itemFound = productDatabase.find((product) => product.id === item.id);
+    const itemFound = products.find((product) => product.id === item.id);
 
     // console.log(itemFound);
 
