@@ -1,7 +1,4 @@
-import {
-  React,
-  useState,
-} from 'react';
+import { useState } from 'react';
 
 import Cookies from 'js-cookie';
 import Head from 'next/head';
@@ -33,11 +30,11 @@ export default function Cart(props) {
   const [inCart, setInCart] = useState(props.product);
   //  const [count, setCount] = useState(1);
 
-  let Sum = props.product.reduce(function (prev, current) {
+  const sum = props.product.reduce(function (prev, current) {
     return prev + current.quantitiy * current.price;
   }, 0);
 
-  const [totalSum, setTotalSum] = useState(Sum);
+  const [totalSum, setTotalSum] = useState(sum);
 
   return (
     <div>
@@ -92,15 +89,17 @@ export default function Cart(props) {
                       let newArray = inCart.filter(
                         (item) => item.id !== detail.id,
                       );
-                      console.log(newArray);
+                      // console.log(newArray);
 
                       Cookies.set('products', JSON.stringify(newCart));
 
-                      setTotalSum(Sum);
                       setInCart([...newArray]);
-                      console.log(newCart);
 
-                      // console.log(props.product);
+                      const newSum = newArray.reduce(function (prev, current) {
+                        return prev + current.quantitiy * current.price;
+                      }, 0);
+
+                      setTotalSum(newSum);
                     }}
                   >
                     Remove
