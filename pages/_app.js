@@ -1,7 +1,4 @@
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useState } from 'react';
 
 import Cookies from 'js-cookie';
 
@@ -13,13 +10,11 @@ import {
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }) {
-  const [currentCart, setCurrentCart] = useState([]);
-  useEffect(() => {
-    const cartItem = Cookies.get('products')
-      ? JSON.parse(Cookies.get('products'))
-      : [];
-    setCurrentCart(cartItem);
-  }, []);
+  const cartItem = Cookies.get('products')
+    ? JSON.parse(Cookies.get('products'))
+    : [];
+
+  const [itemInCart, setItemInCart] = useState(cartItem);
 
   return (
     <>
@@ -36,8 +31,12 @@ function MyApp({ Component, pageProps }) {
         `}
       />
       {/*} {*/}
-      <Layout currentCart={currentCart}>
-        <Component {...pageProps} />
+      <Layout itemInCart={itemInCart} setItemInCart={setItemInCart}>
+        <Component
+          {...pageProps}
+          itemInCart={itemInCart}
+          setItemInCart={setItemInCart}
+        />
         {/* Here is the output of the pages*/}
       </Layout>
     </>

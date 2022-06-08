@@ -30,8 +30,8 @@ const header = css`
 `;
 
 export default function Header(props) {
-  console.log(props.currentCart);
-  let totalItems = props.currentCart.reduce(function (prev, current) {
+  console.log(props.itemInCart);
+  let totalItems = props.itemInCart.reduce(function (prev, current) {
     return prev + current.count;
   }, 0);
 

@@ -106,6 +106,7 @@ export default function Cart(props) {
                       }, 0);
 
                       setTotalSum(newSum);
+                      props.setItemInCart(newCart);
                     }}
                   >
                     Remove

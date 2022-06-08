@@ -123,22 +123,9 @@ export default function ButterflyDetails(props) {
                 return prev + current.count;
               }, 0);
 
-              {
-                /*} if (typeof window !== undefined) {
-                localStorage.setItem(
-                  'cartItems',
-
-                  getState(JSON.stringify(totalItems)),
-                );
-              }
-
-            console.log(localStorage); {*/
-              }
-
-              // update the cookie
-
               Cookies.set('products', JSON.stringify(newCart));
-              props.setCurrentCart(newCart);
+
+              props.setItemInCart(newCart);
             }}
           >
             {' '}
