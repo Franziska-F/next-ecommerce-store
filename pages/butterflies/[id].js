@@ -104,6 +104,7 @@ export default function ButterflyDetails(props) {
                     ? { ...obj, count: obj.count + count }
                     : obj,
                 );
+                // console.log(newCart);
                 // setCount(count);
                 /* newCart = currentCart.filter((productsInCart) => {
                   return productsInCart.id !== props.butterfly.id;
@@ -117,8 +118,27 @@ export default function ButterflyDetails(props) {
                 ];
                 //  setIsInCart(true);
               }
+
+              let totalItems = newCart.reduce(function (prev, current) {
+                return prev + current.count;
+              }, 0);
+
+              {
+                /*} if (typeof window !== undefined) {
+                localStorage.setItem(
+                  'cartItems',
+
+                  getState(JSON.stringify(totalItems)),
+                );
+              }
+
+            console.log(localStorage); {*/
+              }
+
               // update the cookie
+
               Cookies.set('products', JSON.stringify(newCart));
+              props.setCurrentCart(newCart);
             }}
           >
             {' '}

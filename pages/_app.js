@@ -1,4 +1,11 @@
 import {
+  useEffect,
+  useState,
+} from 'react';
+
+import Cookies from 'js-cookie';
+
+import {
   css,
   Global,
 } from '@emotion/react';
@@ -6,6 +13,14 @@ import {
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }) {
+  const [currentCart, setCurrentCart] = useState([]);
+  useEffect(() => {
+    const cartItem = Cookies.get('products')
+      ? JSON.parse(Cookies.get('products'))
+      : [];
+    setCurrentCart(cartItem);
+  }, []);
+
   return (
     <>
       <Global
@@ -20,9 +35,10 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-
-      <Layout>
-        <Component {...pageProps} /> {/* Here is the output of the pages*/}
+      {/*} {*/}
+      <Layout currentCart={currentCart}>
+        <Component {...pageProps} />
+        {/* Here is the output of the pages*/}
       </Layout>
     </>
   );

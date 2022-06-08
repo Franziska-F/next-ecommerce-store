@@ -34,6 +34,12 @@ export default function Cart(props) {
     return prev + current.quantitiy * current.price;
   }, 0);
 
+  /* const totalItems = props.product.reduce(function (prev, current) {
+    return prev + current.quantitiy;
+  }, 0);
+
+  console.log(totalItems); */
+
   const [totalSum, setTotalSum] = useState(sum);
 
   return (

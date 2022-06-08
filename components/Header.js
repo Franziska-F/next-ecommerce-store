@@ -29,7 +29,12 @@ const header = css`
   }
 `;
 
-export default function Header() {
+export default function Header(props) {
+  console.log(props.currentCart);
+  let totalItems = props.currentCart.reduce(function (prev, current) {
+    return prev + current.count;
+  }, 0);
+
   return (
     <header css={header}>
       <div className="links">
@@ -43,8 +48,10 @@ export default function Header() {
           </li>
         </ul>
       </div>
+
       <div className="cart">
-        <span>Items: </span>
+        <span>{totalItems}</span>
+
         <Link href="/cart"> 🛒 </Link>
       </div>
     </header>
