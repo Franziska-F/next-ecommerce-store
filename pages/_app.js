@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 
 import Cookies from 'js-cookie';
 
@@ -9,12 +12,17 @@ import {
 
 import Layout from '../components/Layout';
 
+// give it props
 function MyApp({ Component, pageProps }) {
-  const cartItem = Cookies.get('products')
-    ? JSON.parse(Cookies.get('products'))
-    : [];
+  // don't need it
+  const [itemInCart, setItemInCart] = useState([]);
 
-  const [itemInCart, setItemInCart] = useState(cartItem);
+  useEffect(() => {
+    const cartItem = Cookies.get('products')
+      ? JSON.parse(Cookies.get('products'))
+      : [];
+    setItemInCart(cartItem);
+  }, []);
 
   return (
     <>
@@ -44,3 +52,7 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+export function getInitialProps(context) {
+  // get cookies here
+}
