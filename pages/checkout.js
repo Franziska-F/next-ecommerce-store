@@ -9,12 +9,19 @@ export default function Checkout() {
         <meta name="description" content="A shop for the best butterflies" />
       </Head>
       <h1>Checkout</h1>
-      <form>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          Cookies.remove('products');
+          window.open('/thankyou', '_self');
+        }}
+      >
         <div className="address-wrapper">
           <div>
             <label htmlFor="first_name">First Name</label>
             <input
               id="first_name"
+              name="first_name"
               data-test-id="checkout-first-name"
               required
             />
@@ -71,14 +78,7 @@ export default function Checkout() {
           </div>
         </div>{' '}
         <div>
-          <button
-            data-test-id="checkout-confirm-order"
-            onClick={() => {
-              Cookies.remove('products');
-            }}
-          >
-            Confirm Order
-          </button>
+          <button data-test-id="checkout-confirm-order">Confirm Order</button>
         </div>
       </form>
     </div>
