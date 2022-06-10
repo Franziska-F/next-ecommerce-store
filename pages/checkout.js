@@ -1,31 +1,7 @@
-import { useState } from 'react';
-
+import Cookies from 'js-cookie';
 import Head from 'next/head';
-import Link from 'next/link';
-
-import { css } from '@emotion/react';
-
-const popup = css`
-  width: 400px;
-  background: lightcoral;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.1);
-  text-align: center;
-  visibility: hidden;
-  transition: transform 0.4s, top 0.4s;
-
-  .open-popup {
-    visibility: visible;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(1);
-  }
-`;
 
 export default function Checkout() {
-  const [submit, setSubmit] = useState(false);
-
   return (
     <div>
       <Head>
@@ -97,14 +73,12 @@ export default function Checkout() {
         <div>
           <button
             data-test-id="checkout-confirm-order"
-            onClick={() => setSubmit(true)}
+            onClick={() => {
+              Cookies.remove('products');
+            }}
           >
             Confirm Order
           </button>
-          <div css={popup} className="open-popup">
-            <h2>Thank you for your order</h2>
-            <Link href="/index">Back to homepage</Link>
-          </div>
         </div>
       </form>
     </div>

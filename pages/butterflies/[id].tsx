@@ -1,9 +1,7 @@
-import {
-  React,
-  useState,
-} from 'react';
+import { useState } from 'react';
 
 import Cookies from 'js-cookie';
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -104,24 +102,16 @@ export default function ButterflyDetails(props) {
                     ? { ...obj, count: obj.count + count }
                     : obj,
                 );
-                // console.log(newCart);
-                // setCount(count);
-                /* newCart = currentCart.filter((productsInCart) => {
-                  return productsInCart.id !== props.butterfly.id;
-                }); // if id is different, pass the filter
-                setIsInCart(true);
-                setCount(count); */
               } else {
                 newCart = [
                   ...currentCart,
                   { id: props.butterfly.id, count: count },
                 ];
-                //  setIsInCart(true);
               }
 
-              let totalItems = newCart.reduce(function (prev, current) {
-                return prev + current.count;
-              }, 0);
+              // let  totalItems = newCart.reduce(function (prev, current) {
+              //  return prev + current.count;
+              // }, 0);
 
               Cookies.set('products', JSON.stringify(newCart));
 
@@ -137,7 +127,7 @@ export default function ButterflyDetails(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   /* const currentCart = JSON.parse(context.req.cookies.products || '[]');
 
   const foundButterfly = productDatabase.find((butterfly) => {

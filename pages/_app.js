@@ -12,9 +12,7 @@ import {
 
 import Layout from '../components/Layout';
 
-// give it props
 function MyApp({ Component, pageProps }) {
-  // don't need it
   const [itemInCart, setItemInCart] = useState([]);
 
   useEffect(() => {
@@ -38,7 +36,7 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-      {/*} {*/}
+
       <Layout itemInCart={itemInCart} setItemInCart={setItemInCart}>
         <Component
           {...pageProps}
@@ -52,7 +50,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
-
-export function getInitialProps(context) {
-  // get cookies here
-}

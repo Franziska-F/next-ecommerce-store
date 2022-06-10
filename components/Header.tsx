@@ -29,11 +29,24 @@ const header = css`
   }
 `;
 
-export default function Header(props) {
+// Props is an Array of objects, therefore the "[]"
+type Props = {
+  itemInCart: {
+    id: number;
+    count: number;
+  }[];
+};
+
+export default function Header(props: Props) {
   console.log(props.itemInCart);
-  let totalItems = props.itemInCart.reduce(function (prev, current) {
+  // any is maybe not the best specification but "number" would not accept current.count...
+  const totalItems = props.itemInCart.reduce(function (
+    prev: number,
+    current: any,
+  ) {
     return prev + current.count;
-  }, 0);
+  },
+  0);
 
   return (
     <header css={header}>

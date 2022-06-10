@@ -1,6 +1,15 @@
 import Header from './Header';
 
-export default function Layout(props) {
+type Props = {
+  itemInCart: {
+    id: number;
+    count: number;
+  }[];
+  children?: React.ReactNode;
+  setItemInCart: any;
+};
+
+export default function Layout(props: Props) {
   return (
     <div>
       <Header
