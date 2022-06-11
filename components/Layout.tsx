@@ -6,7 +6,10 @@ type Props = {
     count: number;
   }[];
   children?: React.ReactNode;
-  setItemInCart: any;
+  setItemInCart: {
+    id: number;
+    count: number;
+  };
 };
 
 export default function Layout(props: Props) {

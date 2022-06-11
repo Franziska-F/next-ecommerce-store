@@ -8,7 +8,7 @@ const title = css`
   text-align: center;
 `;
 const hero = css`
-  background-color: #7b7261;
+  background-color: #726a5c;
   display: flex;
 
   color: #f1f0e3;
@@ -68,8 +68,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <titel>🦋 The Butterflyshop | Home</titel>
-        <meta name="description" content="Shop for butterflies" />
+        <title> The Butterflyshop || Home </title>
+        <meta name="description" content="A shop for the best butterflies" />
       </Head>
       <div>
         <div css={hero}>
@@ -93,13 +93,23 @@ export default function Home() {
             </div>
           </div>
           <div className="image-section">
-            <Image src="/images/hero-img.jpg" width="800" height="600" />
+            <Image
+              src="/images/hero-img.jpg"
+              width="800"
+              height="600"
+              alt="Little white and brown butterfly sitting on a white flower"
+            />
           </div>
         </div>
         <section>
           <div css={display}>
             <div className="gallery">
-              <Image src="/images/gallery-img.jpg" width="550" height="400" />
+              <Image
+                src="/images/gallery-img.jpg"
+                width="550"
+                height="400"
+                alt="swallowtail sitting on a flower in a meadow"
+              />
               <h2>Butterflies</h2>
             </div>
             <div className="gallery">
@@ -107,7 +117,12 @@ export default function Home() {
               <h2>Moths</h2>
             </div>
             <div className="gallery">
-              <Image src="/images/gallery02-img.jpg" width="550" height="400" />
+              <Image
+                src="/images/gallery02-img.jpg"
+                width="550"
+                height="400"
+                alt="peacock-butterfly sitting on a pink and red flower"
+              />
               <h2>Why a butterfly?</h2>
             </div>
           </div>

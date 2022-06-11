@@ -94,13 +94,15 @@ export default function ButterflyDetails(props) {
 
               if (
                 currentCart.find(
-                  (productsInCart) => props.butterfly.id === productsInCart.id,
+                  (productsInCart: { id: number; count: number }) =>
+                    props.butterfly.id === productsInCart.id,
                 )
               ) {
-                newCart = currentCart.map((obj) =>
-                  obj.id === props.butterfly.id
-                    ? { ...obj, count: obj.count + count }
-                    : obj,
+                newCart = currentCart.map(
+                  (obj: { id: number; count: number }) =>
+                    obj.id === props.butterfly.id
+                      ? { ...obj, count: obj.count + count }
+                      : obj,
                 );
               } else {
                 newCart = [

@@ -24,9 +24,9 @@ export default function AllProducts(props) {
   return (
     <>
       <Head>
-        <titel>Products</titel>
-        <meta name="description" content="List of avaliable butterflies" />
-      </Head>{' '}
+        <title> The Butterflyshop || Porducts </title>
+        <meta name="description" content="A shop for the best butterflies" />
+      </Head>
       <h1 css={test}>Products</h1>
       <div css={productWrapper}>
         <div className="product-wrapper">

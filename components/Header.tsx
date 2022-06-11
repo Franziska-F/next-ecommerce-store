@@ -27,6 +27,33 @@ const header = css`
   .cart {
     margin-right: 30px;
   }
+  .cart ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .cart ul li {
+    margin: 4px 8px;
+  }
+  .item-display {
+    border-radius: 50%;
+    background-color: #f1f0e3;
+    align-items: center;
+    color: #333333;
+    height: 24px;
+    width: 26px;
+    text-align: center;
+  }
+  .cart-display {
+    align-items: center;
+  }
+  .cart ul li a {
+    cursor: pointer;
+    color: #f1f0e3;
+  }
+  .cart ul a:hover {
+    font-size: 18px;
+  }
 `;
 
 // Props is an Array of objects, therefore the "[]"
@@ -63,9 +90,22 @@ export default function Header(props: Props) {
       </div>
 
       <div className="cart">
-        <span>{totalItems}</span>
-
-        <Link href="/cart"> 🛒 </Link>
+        <ul>
+          <li>
+            {' '}
+            <Link href="/cart">
+              <a>
+                {' '}
+                <span className="cart-display">Cart:</span>
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/cart">
+              <div className="item-display">{totalItems}</div>
+            </Link>
+          </li>
+        </ul>
       </div>
     </header>
   );
