@@ -43,8 +43,8 @@ const hero = css`
     background-color: #f1f0e3;
     color: #7b7261;
   }
-  .image-section img {
-    max-width: 100%;
+  .image-section {
+    width: 100%;
   }
 `;
 const display = css`
@@ -98,6 +98,7 @@ export default function Home() {
               width="800"
               height="600"
               alt="Little white and brown butterfly sitting on a white flower"
+              layout="responsive"
             />
           </div>
         </div>
