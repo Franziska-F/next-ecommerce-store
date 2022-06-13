@@ -1,18 +1,7 @@
+import Footer from './Footer';
 import Header from './Header';
 
-type Props = {
-  itemInCart: {
-    id: number;
-    count: number;
-  }[];
-  children?: React.ReactNode;
-  setItemInCart: {
-    id: number;
-    count: number;
-  };
-};
-
-export default function Layout(props: Props) {
+export default function Layout(props) {
   return (
     <div>
       <Header
@@ -20,6 +9,7 @@ export default function Layout(props: Props) {
         setItemInCart={props.setItemInCart}
       />
       {props.children} {/* all the content of the page */}
+      <Footer />{' '}
     </div>
   );
 }

@@ -74,9 +74,6 @@ export default function Home() {
       <div>
         <div css={hero}>
           <div className="content-section">
-            <div className="brand-section">
-              <span></span>
-            </div>
             <div className="hero-header">
               <h1 css={title}>Time to fly with natur</h1>
               <div className="hero-text">
