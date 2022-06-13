@@ -28,17 +28,10 @@ const card = css`
 
 export default function Cart(props) {
   const [inCart, setInCart] = useState(props.product);
-  //  const [count, setCount] = useState(1);
 
   const sum = props.product.reduce(function (prev, current) {
     return prev + current.quantitiy * current.price;
   }, 0);
-
-  /* const totalItems = props.product.reduce(function (prev, current) {
-    return prev + current.quantitiy;
-  }, 0);
-
-  console.log(totalItems); */
 
   const [totalSum, setTotalSum] = useState(sum);
 
