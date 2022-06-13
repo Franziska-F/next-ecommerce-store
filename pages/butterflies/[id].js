@@ -109,12 +109,17 @@ export default function ButterflyDetails(props) {
               src={`/images/${props.butterfly.id}.jpeg`}
               width="400"
               height="300"
+              data-test-id="product-image"
             />
           </div>
           <div className="text-container">
             <h2>{props.butterfly.type}</h2>
 
-            <div className="price"> {props.butterfly.price / 100} € </div>
+            <div className="price" data-test-id="product-price">
+              {' '}
+              {props.butterfly.price / 100}{' '}
+            </div>
+
             <div className="description">
               <p>{props.butterfly.description}</p>
             </div>
@@ -132,7 +137,9 @@ export default function ButterflyDetails(props) {
               >
                 -
               </button>
-              <div className="count">{count}</div>
+              <div data-test-id="product-quantity" className="count">
+                {count}
+              </div>
               <button
                 className="btn-control"
                 onClick={() => {
@@ -143,6 +150,7 @@ export default function ButterflyDetails(props) {
               </button>
             </div>
             <button
+              data-test-id="product-add-to-cart"
               className="addCard-btn"
               onClick={() => {
                 const currentCart = Cookies.get('products') // is there a cookie with value 'product'?

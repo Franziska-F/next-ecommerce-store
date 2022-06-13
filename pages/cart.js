@@ -51,13 +51,18 @@ export default function Cart(props) {
       <main css={card}>
         <h1>Your cart </h1>
         {}{' '}
-        <div className="product-section">
+        <div
+          data-test-id="cart-product-<product id>"
+          className="product-section"
+        >
           {inCart.map((detail) => {
             return (
               <div className="inner-product-section" key={detail.id}>
                 <div>{detail.name}</div>{' '}
                 <div>Price: {detail.price / 100} € </div>
-                <div>Quantity: {detail.quantitiy} </div>{' '}
+                <div data-test-id="cart-product-quantity-<product id>">
+                  Quantity: {detail.quantitiy}{' '}
+                </div>{' '}
                 {/* } <div className="quantity-counter">
                 <button
                   className="btn-control"
@@ -81,6 +86,7 @@ export default function Cart(props) {
                 </div> { */}
                 <div className="remove-btn">
                   <button
+                    data-test-id="cart-product-remove-<product id>"
                     onClick={() => {
                       const currentCart = Cookies.get('products')
                         ? JSON.parse(Cookies.get('products'))
@@ -118,12 +124,12 @@ export default function Cart(props) {
         </div>
         <div className="checkout">
           <div>
-            <span>Total sum: {totalSum / 100}</span>
+            <span data-test-id="cart-total">Total sum: {totalSum / 100}</span>
           </div>
           <br />
           <div>
             <Link href="/checkout">
-              <button>Check out</button>
+              <button data-test-id="cart-checkout">Check out</button>
             </Link>
           </div>
         </div>

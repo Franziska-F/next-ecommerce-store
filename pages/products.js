@@ -75,7 +75,10 @@ export default function AllProducts(props) {
               >
                 <div className="img-container">
                   {' '}
-                  <Link href={`/butterflies/${product.id}`}>
+                  <Link
+                    href={`/butterflies/${product.id}`}
+                    data-test-id="product-<product id>"
+                  >
                     <Image
                       src={`/images/${product.id}.jpeg`}
                       width="400"

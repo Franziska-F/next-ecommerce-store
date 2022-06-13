@@ -84,7 +84,9 @@ export default function Header(props: Props) {
           </li>
 
           <li>
-            <Link href="/products">Products </Link>
+            <Link href="/products" data-test-id="products-link">
+              Products
+            </Link>
           </li>
         </ul>
       </div>
@@ -93,7 +95,7 @@ export default function Header(props: Props) {
         <ul>
           <li>
             {' '}
-            <Link href="/cart">
+            <Link data-test-id="cart-link" href="/cart">
               <a>
                 {' '}
                 <span className="cart-display">Cart:</span>
@@ -102,7 +104,9 @@ export default function Header(props: Props) {
           </li>
           <li>
             <Link href="/cart">
-              <div className="item-display">{totalItems}</div>
+              <div data-test-id="cart-count" className="item-display">
+                {totalItems}
+              </div>
             </Link>
           </li>
         </ul>
