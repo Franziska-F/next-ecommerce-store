@@ -65,7 +65,6 @@ type Props = {
 };
 
 export default function Header(props: Props) {
-  console.log(props.itemInCart);
   // any is maybe not the best specification but "number" would not accept current.count...
   const totalItems = props.itemInCart.reduce(function (
     prev: number,

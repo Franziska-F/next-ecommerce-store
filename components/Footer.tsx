@@ -36,7 +36,7 @@ export default function Footer() {
         </ul>
       </div>
       <div className="copyright">
-        <span>© 2022 THe Butterflyshop</span>
+        <span>© 2022 The Butterflyshop</span>
       </div>
     </footer>
   );

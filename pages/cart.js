@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 
 import Cookies from 'js-cookie';
 import Head from 'next/head';
@@ -29,11 +32,20 @@ const card = css`
 export default function Cart(props) {
   const [inCart, setInCart] = useState(props.product);
 
-  const sum = props.product.reduce(function (prev, current) {
-    return prev + current.quantitiy * current.price;
-  }, 0);
+  const [totalSum, setTotalSum] = useState([]);
 
-  const [totalSum, setTotalSum] = useState(sum);
+  useEffect(() => {
+    const sum = props.product.reduce(function (prev, current) {
+      return prev + current.quantitiy * current.price;
+    }, 0);
+    setTotalSum(sum);
+  }, []);
+
+  // const sum = props.product.reduce(function (prev, current) {
+  //   return prev + current.quantitiy * current.price;
+  // }, 0);
+
+  // const [totalSum, setTotalSum] = useState(sum);
 
   return (
     <div>
@@ -56,27 +68,6 @@ export default function Cart(props) {
                 <div data-test-id="cart-product-quantity-<product id>">
                   Quantity: {detail.quantitiy}{' '}
                 </div>{' '}
-                {/* } <div className="quantity-counter">
-                <button
-                  className="btn-control"
-                  onClick={() => {
-                    if (count > 1) {
-                      setCount(count - 1);
-                    }
-                  }}
-                >
-                  ⬇️
-                </button>
-                <span className="count">{count}</span>
-                <button
-                  className="btn-control"
-                  onClick={() => {
-                    setCount(count + 1);
-                  }}
-                >
-                  ⬆️
-                </button>
-                </div> { */}
                 <div className="remove-btn">
                   <button
                     data-test-id="cart-product-remove-<product id>"
@@ -84,17 +75,14 @@ export default function Cart(props) {
                       const currentCart = Cookies.get('products')
                         ? JSON.parse(Cookies.get('products'))
                         : [];
-                      let newCart;
-
-                      newCart = currentCart.filter(
+                      // let newCart;
+                      const newCart = currentCart.filter(
                         (productInCart) => productInCart.id !== detail.id,
                       );
-                      // console.log(newCart);
 
-                      let newArray = inCart.filter(
+                      const newArray = inCart.filter(
                         (item) => item.id !== detail.id,
                       );
-                      // console.log(newArray);
 
                       Cookies.set('products', JSON.stringify(newCart));
 
