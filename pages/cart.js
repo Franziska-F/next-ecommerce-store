@@ -1,7 +1,4 @@
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useState } from 'react';
 
 import Cookies from 'js-cookie';
 import Head from 'next/head';
@@ -32,20 +29,11 @@ const card = css`
 export default function Cart(props) {
   const [inCart, setInCart] = useState(props.product);
 
-  const [totalSum, setTotalSum] = useState([]);
+  const sum = props.product.reduce(function (prev, current) {
+    return prev + current.quantitiy * current.price;
+  }, 0);
 
-  useEffect(() => {
-    const sum = props.product.reduce(function (prev, current) {
-      return prev + current.quantitiy * current.price;
-    }, 0);
-    setTotalSum(sum);
-  }, []);
-
-  // const sum = props.product.reduce(function (prev, current) {
-  //   return prev + current.quantitiy * current.price;
-  // }, 0);
-
-  // const [totalSum, setTotalSum] = useState(sum);
+  const [totalSum, setTotalSum] = useState(sum);
 
   return (
     <div>

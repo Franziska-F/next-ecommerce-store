@@ -95,7 +95,7 @@ export default function Header(props: Props) {
           <li>
             {' '}
             <Link data-test-id="cart-link" href="/cart">
-              <a>
+              <a data-test-id="cart-link">
                 {' '}
                 <span className="cart-display">Cart:</span>
               </a>
