@@ -83,8 +83,8 @@ export default function Header(props: Props) {
           </li>
 
           <li>
-            <Link href="/products" data-test-id="products-link">
-              Products
+            <Link href="/products">
+              <a data-test-id="products-link"> Products</a>
             </Link>
           </li>
         </ul>
@@ -94,7 +94,7 @@ export default function Header(props: Props) {
         <ul>
           <li>
             {' '}
-            <Link data-test-id="cart-link" href="/cart">
+            <Link href="/cart">
               <a data-test-id="cart-link">
                 {' '}
                 <span className="cart-display">Cart:</span>
