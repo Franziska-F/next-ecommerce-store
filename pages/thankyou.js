@@ -8,7 +8,7 @@ export default function Thankyou() {
         <title> The Butterflyshop || Thank you for your order </title>
         <meta name="description" content="A shop for the best butterflies" />
       </Head>
-      <h2>Thank you!</h2> <Link href="index">Back to homepage</Link>
+      <h2>Thank you!</h2> <Link href="/">Back to homepage</Link>
     </div>
   );
 }
