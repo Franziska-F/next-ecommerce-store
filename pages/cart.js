@@ -44,21 +44,22 @@ export default function Cart(props) {
       <main css={card}>
         <h1>Your cart </h1>
         {}{' '}
-        <div
-          data-test-id="cart-product-<product id>"
-          className="product-section"
-        >
+        <div className="product-section">
           {inCart.map((detail) => {
             return (
-              <div className="inner-product-section" key={detail.id}>
+              <div
+                className="inner-product-section"
+                key={detail.id}
+                data-test-id={`cart-product-${detail.id}`}
+              >
                 <div>{detail.name}</div>{' '}
                 <div>Price: {detail.price / 100} € </div>
-                <div data-test-id="cart-product-quantity-<product id>">
+                <div data-test-id={`cart-product-quantity-${detail.id}`}>
                   Quantity: {detail.quantitiy}{' '}
                 </div>{' '}
                 <div className="remove-btn">
                   <button
-                    data-test-id="cart-product-remove-<product id>"
+                    data-test-id={`cart-product-remove-${detail.id}`}
                     onClick={() => {
                       const currentCart = Cookies.get('cart')
                         ? JSON.parse(Cookies.get('cart'))

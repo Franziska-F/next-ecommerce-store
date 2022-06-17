@@ -16,9 +16,7 @@ function MyApp({ Component, pageProps }) {
   const [itemInCart, setItemInCart] = useState([]);
 
   useEffect(() => {
-    const cartItem = Cookies.get('products')
-      ? JSON.parse(Cookies.get('products'))
-      : [];
+    const cartItem = Cookies.get('cart') ? JSON.parse(Cookies.get('cart')) : [];
     setItemInCart(cartItem);
   }, []);
 
