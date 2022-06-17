@@ -65,7 +65,7 @@ export default function Checkout() {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            Cookies.remove('products');
+            Cookies.remove('cart');
             window.open('/thankyou', '_self');
           }}
         >

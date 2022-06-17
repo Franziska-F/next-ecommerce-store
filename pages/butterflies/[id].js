@@ -156,8 +156,8 @@ export default function ButterflyDetails(props) {
               data-test-id="product-add-to-cart"
               className="addCard-btn"
               onClick={() => {
-                const currentCart = Cookies.get('products') // is there a cookie with value 'product'?
-                  ? JSON.parse(Cookies.get('products'))
+                const currentCart = Cookies.get('cart') // is there a cookie with value 'product'?
+                  ? JSON.parse(Cookies.get('cart'))
                   : [];
                 // if not, return empty array
                 let newCart;
@@ -182,7 +182,7 @@ export default function ButterflyDetails(props) {
                   ];
                 }
 
-                Cookies.set('products', JSON.stringify(newCart));
+                Cookies.set('cart', JSON.stringify(newCart));
 
                 props.setItemInCart(newCart);
               }}
@@ -198,7 +198,7 @@ export default function ButterflyDetails(props) {
 }
 
 export async function getServerSideProps(context) {
-  /* const currentCart = JSON.parse(context.req.cookies.products || '[]');
+  /* const currentCart = JSON.parse(context.req.cookies.cart || '[]');
 
   const foundButterfly = productDatabase.find((butterfly) => {
     return butterfly.id === context.query.id;

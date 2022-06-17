@@ -60,8 +60,8 @@ export default function Cart(props) {
                   <button
                     data-test-id="cart-product-remove-<product id>"
                     onClick={() => {
-                      const currentCart = Cookies.get('products')
-                        ? JSON.parse(Cookies.get('products'))
+                      const currentCart = Cookies.get('cart')
+                        ? JSON.parse(Cookies.get('cart'))
                         : [];
                       // let newCart;
                       const newCart = currentCart.filter(
@@ -72,7 +72,7 @@ export default function Cart(props) {
                         (item) => item.id !== detail.id,
                       );
 
-                      Cookies.set('products', JSON.stringify(newCart));
+                      Cookies.set('cart', JSON.stringify(newCart));
 
                       setInCart([...newArray]);
 
@@ -110,7 +110,7 @@ export default function Cart(props) {
 export async function getServerSideProps(context) {
   const products = await getProducts();
   // get cookie content
-  const currentCart = JSON.parse(context.req.cookies.products || '[]');
+  const currentCart = JSON.parse(context.req.cookies.cart || '[]');
   // Get data from database
 
   const productInCart = currentCart.map((item) => {
