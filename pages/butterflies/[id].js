@@ -137,9 +137,12 @@ export default function ButterflyDetails(props) {
               >
                 -
               </button>
-              <div data-test-id="product-quantity" className="count">
-                {count}
-              </div>
+              <input
+                data-test-id="product-quantity"
+                className="count"
+                value={count}
+              />
+
               <button
                 className="btn-control"
                 onClick={() => {
